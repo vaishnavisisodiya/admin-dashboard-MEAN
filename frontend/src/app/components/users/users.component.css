@@ -1,0 +1,63 @@
+@import '../dashboard/dashboard.component.css';
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: var(--bg-tertiary);
+}
+
+th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border-color);
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+td button {
+  margin-right: 0.5rem;
+}
+
+tbody tr {
+  transition: background var(--transition-fast);
+}
+
+tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+.badge-secondary {
+  background: rgba(148, 163, 184, 0.2);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  table {
+    font-size: 0.875rem;
+  }
+  
+  th, td {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  td button {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+}

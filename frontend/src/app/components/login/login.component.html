@@ -1,0 +1,117 @@
+<div class="login-container">
+  <div class="login-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="8" fill="url(#gradient)"/>
+            <path d="M12 20L18 26L28 14" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#ec4899"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h1>Admin Dashboard</h1>
+      </div>
+      <p class="subtitle">{{ isRegisterMode ? 'Create your account' : 'Welcome back! Please login to continue.' }}</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group" *ngIf="isRegisterMode">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="name"
+          name="name"
+          placeholder="Enter your full name"
+          [disabled]="loading"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Enter your email"
+          [disabled]="loading"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Enter your password"
+          [disabled]="loading"
+          required>
+      </div>
+
+      <div class="error-message" *ngIf="error">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/>
+        </svg>
+        {{ error }}
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="loading">
+        <span *ngIf="!loading">{{ isRegisterMode ? 'Create Account' : 'Sign In' }}</span>
+        <span *ngIf="loading" class="spinner"></span>
+      </button>
+
+      <div class="demo-credentials" *ngIf="!isRegisterMode">
+        <button type="button" class="btn-demo" (click)="fillDemoCredentials()" [disabled]="loading">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 8a3 3 0 100-6 3 3 0 000 6zm2-3a2 2 0 11-4 0 2 2 0 014 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+          </svg>
+          Use Demo Account
+        </button>
+      </div>
+    </form>
+
+    <div class="login-footer">
+      <p>
+        {{ isRegisterMode ? 'Already have an account?' : "Don't have an account?" }}
+        <a (click)="toggleMode()" class="toggle-link">
+          {{ isRegisterMode ? 'Sign In' : 'Sign Up' }}
+        </a>
+      </p>
+    </div>
+
+    <div class="features">
+      <div class="feature-item">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+        </svg>
+        <span>Secure Authentication</span>
+      </div>
+      <div class="feature-item">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+        </svg>
+        <span>Real-time Analytics</span>
+      </div>
+      <div class="feature-item">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+        </svg>
+        <span>User Management</span>
+      </div>
+    </div>
+  </div>
+</div>
