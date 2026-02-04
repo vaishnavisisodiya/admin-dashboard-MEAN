@@ -23,7 +23,7 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    // Redirect if already logged in
+    
     if (this.authService.isAuthenticated()) {
       this.router.navigate(['/dashboard']);
     }

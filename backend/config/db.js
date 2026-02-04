@@ -9,7 +9,6 @@ const connectDB = async () => {
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
     
-    // Seed initial data if database is empty
     await seedInitialData();
   } catch (error) {
     console.error(`Error: ${error.message}`);
@@ -17,13 +16,11 @@ const connectDB = async () => {
   }
 };
 
-// Seed initial data for testing
 const seedInitialData = async () => {
   const User = require('../models/User');
   const Analytics = require('../models/Analytics');
 
   try {
-    // Check if admin user exists
     const adminExists = await User.findOne({ email: 'admin@admin.com' });
     
     if (!adminExists) {
@@ -38,7 +35,6 @@ const seedInitialData = async () => {
       console.log('Admin user created successfully');
     }
 
-    // Check if regular user exists
     const userExists = await User.findOne({ email: 'user@user.com' });
     
     if (!userExists) {
@@ -53,13 +49,12 @@ const seedInitialData = async () => {
       console.log('Regular user created successfully');
     }
 
-    // Check if analytics data exists
     const analyticsExists = await Analytics.findOne();
     
     if (!analyticsExists) {
       console.log('Creating initial analytics data...');
       
-      // Create sample analytics data for the last 12 months
+     
       const currentDate = new Date();
       const analyticsData = [];
       

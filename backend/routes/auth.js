@@ -3,9 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const { generateToken, protect } = require('../middleware/auth');
 
-// @route   POST /api/auth/register
-// @desc    Register a new user
-// @access  Public
+
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -52,14 +50,11 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// @route   POST /api/auth/login
-// @desc    Login user
-// @access  Public
+
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Validate input
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -77,7 +72,6 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // Check if account is active
     if (!user.isActive) {
       return res.status(401).json({
         success: false,
@@ -85,7 +79,7 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // Check if password matches
+
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
@@ -95,11 +89,10 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    // Update last login
     user.lastLogin = Date.now();
     await user.save();
 
-    // Generate token
+ 
     const token = generateToken(user._id);
 
     res.status(200).json({
@@ -124,9 +117,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// @route   GET /api/auth/profile
-// @desc    Get current user profile
-// @access  Private
+
 router.get('/profile', protect, async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -152,9 +143,7 @@ router.get('/profile', protect, async (req, res) => {
   }
 });
 
-// @route   PUT /api/auth/profile
-// @desc    Update user profile
-// @access  Private
+
 router.put('/profile', protect, async (req, res) => {
   try {
     const { name, email } = req.body;

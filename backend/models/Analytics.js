@@ -47,7 +47,7 @@ const analyticsSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Index for faster queries
+
 analyticsSchema.index({ date: -1 });
 
 module.exports = mongoose.model('Analytics', analyticsSchema);

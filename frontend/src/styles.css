@@ -1,9 +1,7 @@
-/* ===========================
-   Global Styles & Variables
-   =========================== */
+
 
 :root {
-  /* Color Palette - Modern Dark Theme with Vibrant Accents */
+
   --primary: #6366f1;
   --primary-dark: #4f46e5;
   --primary-light: #818cf8;
@@ -13,54 +11,51 @@
   --warning: #f59e0b;
   --error: #ef4444;
   
-  /* Background Colors */
+  
   --bg-primary: #0f0f1e;
   --bg-secondary: #1a1a2e;
   --bg-tertiary: #252538;
   --bg-card: #1e1e30;
   --bg-hover: #2a2a3e;
   
-  /* Text Colors */
+
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   
-  /* Border & Divider */
+  
   --border-color: #2d2d44;
   --divider: #1e1e30;
   
-  /* Shadows */
+
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
-  
-  /* Spacing */
+
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
   
-  /* Border Radius */
+  
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   
-  /* Transitions */
+  
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 400ms ease;
   
-  /* Fonts */
+  
   --font-primary: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 
-/* ===========================
-   Reset & Base Styles
-   =========================== */
+
 
 * {
   margin: 0;
@@ -82,9 +77,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ===========================
-   Typography
-   =========================== */
+
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
@@ -114,9 +107,7 @@ a:hover {
   color: var(--primary-light);
 }
 
-/* ===========================
-   Utility Classes
-   =========================== */
+
 
 .container {
   width: 100%;
@@ -149,9 +140,7 @@ a:hover {
 .text-muted { color: var(--text-muted); }
 .text-secondary { color: var(--text-secondary); }
 
-/* ===========================
-   Card Styles
-   =========================== */
+
 
 .card {
   background: var(--bg-card);
@@ -187,9 +176,7 @@ a:hover {
   padding: var(--spacing-sm) 0;
 }
 
-/* ===========================
-   Button Styles
-   =========================== */
+
 
 .btn {
   display: inline-flex;
@@ -260,9 +247,7 @@ a:hover {
   font-size: 1.125rem;
 }
 
-/* ===========================
-   Form Styles
-   =========================== */
+
 
 .form-group {
   margin-bottom: var(--spacing-md);
@@ -300,9 +285,7 @@ input::placeholder {
   color: var(--text-muted);
 }
 
-/* ===========================
-   Table Styles
-   =========================== */
+
 
 .table-container {
   overflow-x: auto;
@@ -343,9 +326,7 @@ tbody tr:hover {
   background: var(--bg-hover);
 }
 
-/* ===========================
-   Badge & Status Styles
-   =========================== */
+
 
 .badge {
   display: inline-block;
@@ -377,9 +358,7 @@ tbody tr:hover {
   color: var(--primary-light);
 }
 
-/* ===========================
-   Loading & Animation
-   =========================== */
+
 
 .spinner {
   width: 40px;
@@ -409,9 +388,6 @@ tbody tr:hover {
   }
 }
 
-/* ===========================
-   Scrollbar Styling
-   =========================== */
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -431,9 +407,7 @@ tbody tr:hover {
   background: var(--primary);
 }
 
-/* ===========================
-   Responsive Design
-   =========================== */
+
 
 @media (max-width: 1024px) {
   :root {

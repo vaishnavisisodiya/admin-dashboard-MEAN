@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }),
     );
 
-    // Sales Chart
+
     const salesCtx = document.getElementById("salesChart") as HTMLCanvasElement;
     if (salesCtx && !this.salesChart) {
       this.salesChart = new Chart(salesCtx, {
@@ -171,7 +171,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       });
     }
 
-    // User Growth Chart
+
     const userCtx = document.getElementById(
       "userGrowthChart",
     ) as HTMLCanvasElement;

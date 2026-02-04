@@ -4,36 +4,32 @@ const Analytics = require('../models/Analytics');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
 
-// All routes are protected
 router.use(protect);
 
-// @route   GET /api/analytics/dashboard
-// @desc    Get dashboard overview statistics
-// @access  Private
+
 router.get('/dashboard', async (req, res) => {
   try {
-    // Get latest analytics data
+ 
     const latestAnalytics = await Analytics.findOne().sort({ date: -1 });
 
-    // Get real user counts
     const totalUsers = await User.countDocuments();
     const activeUsers = await User.countDocuments({ isActive: true });
 
-    // Calculate new signups in last 30 days
+   
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const newSignups = await User.countDocuments({
       createdAt: { $gte: thirtyDaysAgo }
     });
 
-    // Get analytics data for last 7 days for trend
+ 
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
     const weekData = await Analytics.find({
       date: { $gte: sevenDaysAgo }
     }).sort({ date: 1 });
 
-    // Calculate trends
+
     const calculateTrend = (data, field) => {
       if (data.length < 2) return 0;
       const latest = data[data.length - 1][field];
@@ -69,9 +65,7 @@ router.get('/dashboard', async (req, res) => {
   }
 });
 
-// @route   GET /api/analytics/sales
-// @desc    Get sales data for charts
-// @access  Private
+
 router.get('/sales', async (req, res) => {
   try {
     const { period = '30' } = req.query;
@@ -96,9 +90,7 @@ router.get('/sales', async (req, res) => {
   }
 });
 
-// @route   GET /api/analytics/users
-// @desc    Get user growth data
-// @access  Private
+
 router.get('/users', async (req, res) => {
   try {
     const { period = '90' } = req.query;
@@ -123,9 +115,7 @@ router.get('/users', async (req, res) => {
   }
 });
 
-// @route   GET /api/analytics/revenue
-// @desc    Get revenue breakdown
-// @access  Private
+
 router.get('/revenue', async (req, res) => {
   try {
     const { period = '30' } = req.query;
@@ -137,7 +127,7 @@ router.get('/revenue', async (req, res) => {
       date: { $gte: daysAgo }
     }).sort({ date: 1 }).select('date revenue totalSales conversionRate');
 
-    // Calculate revenue breakdown by category (sample data)
+ 
     const totalRevenue = revenueData.reduce((sum, item) => sum + item.revenue, 0);
     
     const breakdown = {
@@ -163,9 +153,7 @@ router.get('/revenue', async (req, res) => {
   }
 });
 
-// @route   GET /api/analytics/monthly
-// @desc    Get monthly analytics summary
-// @access  Private
+
 router.get('/monthly', async (req, res) => {
   try {
     const { months = '12' } = req.query;
@@ -209,9 +197,7 @@ router.get('/monthly', async (req, res) => {
   }
 });
 
-// @route   POST /api/analytics
-// @desc    Create new analytics entry (for testing)
-// @access  Private/Admin
+
 router.post('/', async (req, res) => {
   try {
     const analytics = await Analytics.create(req.body);

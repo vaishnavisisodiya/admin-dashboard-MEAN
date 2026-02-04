@@ -3,13 +3,10 @@ const router = express.Router();
 const User = require('../models/User');
 const { protect, authorize } = require('../middleware/auth');
 
-// All routes are protected and require admin role
 router.use(protect);
 router.use(authorize('admin'));
 
-// @route   GET /api/users
-// @desc    Get all users
-// @access  Private/Admin
+
 router.get('/', async (req, res) => {
   try {
     const users = await User.find().select('-password').sort({ createdAt: -1 });
@@ -28,9 +25,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// @route   GET /api/users/:id
-// @desc    Get single user
-// @access  Private/Admin
+
 router.get('/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
@@ -55,9 +50,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// @route   PUT /api/users/:id
-// @desc    Update user
-// @access  Private/Admin
+
 router.put('/:id', async (req, res) => {
   try {
     const { name, email, role, isActive } = req.body;
@@ -71,7 +64,7 @@ router.put('/:id', async (req, res) => {
       });
     }
 
-    // Update fields
+
     if (name) user.name = name;
     if (email) user.email = email;
     if (role) user.role = role;
@@ -93,9 +86,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// @route   DELETE /api/users/:id
-// @desc    Delete user
-// @access  Private/Admin
 router.delete('/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -107,7 +97,6 @@ router.delete('/:id', async (req, res) => {
       });
     }
 
-    // Prevent deleting own account
     if (user._id.toString() === req.user._id.toString()) {
       return res.status(400).json({
         success: false,
@@ -130,16 +119,14 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// @route   GET /api/users/stats/summary
-// @desc    Get user statistics
-// @access  Private/Admin
+
 router.get('/stats/summary', async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
     const activeUsers = await User.countDocuments({ isActive: true });
     const adminUsers = await User.countDocuments({ role: 'admin' });
     
-    // Get users created in last 30 days
+  
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const newUsers = await User.countDocuments({
